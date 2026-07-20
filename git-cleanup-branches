@@ -18,6 +18,11 @@ function runCommandSync(command: string, args: string[]): string {
     args: args,
   }).outputSync();
 
+  const stderr = new TextDecoder().decode(result.stderr);
+  if (stderr) {
+    console.error(stderr);
+  }
+
   if (!result.success) {
     const stdout = new TextDecoder().decode(result.stdout);
     if (stdout) {
